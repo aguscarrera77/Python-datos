@@ -77,10 +77,10 @@ nombre2=' traumatologo '
 print(len(nombre2.strip()))
 
 
-name=input("Ingrese su nombre aqui: ")
-name=name.strip().title()
+#name=input("Ingrese su nombre aqui: ")
+#name=name.strip().title()
 
-print(f"El nombre ingresado es {name}")
+#print(f"El nombre ingresado es {name}")
 
 #10 find busca una palabra o la posicion.
 
@@ -88,12 +88,20 @@ text= "Estamos con mis alumnos de Python aprendiendo metodos."
 
 print(text.find("Python"))
 
+registro="  JUAN,PEREZ ,35 ,buenos Aires"
+
+#limpiar los espacios.
+
+registro1=registro.strip().split(',')
+print(registro1)
+
+#separar los datos.
 
 
 
 
 
+#limpia por ciudad.
 
-
-
-
+ciudad=registro1[3].strip().title()
+print(ciudad)
