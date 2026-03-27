@@ -184,4 +184,42 @@ valores=list(alumno.values())
 
 print(valores[1])
 
+#PROBLEMA1.
+
+#Armar perfil de alumno que tenga su nombre,notas,cursos y modulos aprobadas.
+
+perfil_alumno={
+"nombre":'martin',#str
+"notas":[9,8,5,7],#int,lista
+'cursos':(" Programacion ","Turno mañana"),#str,tupla
+"modulos_aprobados":{"HTML","CSS","Base de datos"}#str,set o conjunto.
+
+
+}
+
+#Si el dato cambio mucho lista.
+#Si el dato queda fijo tupla.
+#Si no queres traer valores repetidos set o conjunto.
+
+#Metodos primero lo que voy a chequear es de que tipo son esos datos.
+
+print(perfil_alumno['nombre'].title())
+
+perfil_alumno['notas'].append(4)
+notas=perfil_alumno['notas'].append(10)
+
+print(perfil_alumno['notas'])
+print(notas)
+
+perfil_alumno['notas'].sort()
+
+print(perfil_alumno['notas'])
+
+perfil_alumno['modulos_aprobados'].add("Javascript")
+
+print(perfil_alumno['modulos_aprobados'])
+
+
+
+
 
