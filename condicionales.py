@@ -1,7 +1,8 @@
-#if= es para tomar decisiones con la logica de true/false.
+#if= es genara una condicion con la logica de true/false.
+#if sirve para: saber que quiero detectar, que valores tengo dentro de ese conjunto y tambien puede generar comparaciones a esos datos.
 #los condicionales usan operadores para comporar
-#== igual a...
-#!= distinto ....
+#== exactamente igual...
+#!= distinto o desigual. Campos vacios,errores,valores no permitidos.
 #mayor > si es mayor o igual >=
 #menor < si es menor o igual <=
 
@@ -77,7 +78,31 @@ datos=['Roberto',[8,7,6],"Pergamino"]
 if datos[1][2]!=6:
     print('Notas diferentes de 6')
 
+#AND(y): unir dos condiciones.Doble filtro de datos.
+#Or(o): tengo dos condiociones para comparar datos. 
 
+edad=28 
+nombre='Agustin'
+ventas=12000
+
+if edad>30:
+    print("Es mayor 30")
+elif edad>=18:
+    print("es mayor a 18")
+else:print("Es menor a 18.")
+
+if nombre !="":
+    print("Campo cargado correctamente")
+else:print('Campo obligatorio')
+
+if nombre != None:
+    print("Dato correcto")
+
+#while: bucle. Repite bloques de codigo mientras la condicion sea verdadera o true. while= mientras. 
+contador=1
+while contador <=5:
+    print("Numero: ",contador)
+    contador += 2
 
 
 
