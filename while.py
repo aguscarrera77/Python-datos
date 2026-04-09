@@ -96,6 +96,113 @@ while i < len(productos) and productos[i] != 300:
     i= i + 1
 print('La posicion de 300 es: ',i)
 
+# lista para recorrer con while y usar operaciones. Para sacar un promedio de variables de una lista.
+
+notas=[8,7,10,5,3,6]
+
+i=0
+total=0
+
+while i<len(notas):
+    total= total + notas[i]
+    i= i + 1
+    promedio=total / len(notas)
+
+
+print('Promedio del alumno: ',promedio)
+
+# while lista if. 
+# encontrar aprobados.
+
+notas=[30,55,75,80,98,65,71]
+
+i=0
+aprobados=0
+
+while i < len(notas):
+    if notas[i]>=70:
+        aprobados= aprobados + 1
+    i = i + 1
+
+print('Cantidad de alumnos aprobados: ',aprobados)
+
+
+edades=[10,34,57,12,15,45,21,18]
+
+i=0
+mayores=0
+menores=0
+
+while i < len(edades):
+    if edades[i] >=18:
+        mayores= mayores + 1
+    else: menores= menores + 1
+    i= i + 1
+
+print('Mayores: ',mayores)
+print("Menores: ", menores)
+
+# while recorriendo set.
+
+numbers={-4,10,-5,6}
+
+number=list(numbers)
+
+i=0
+
+while i < len(number):
+    if number[i]<0:
+        print(number[i])
+    i += 1
+
+#while diccionarios.
+
+perfil={
+    'Agustin':48,
+    'Roberto':78,
+    'Marta':35
+}
+
+claves=list(perfil.keys())
+
+i=0
+
+while i < len(claves):
+    nombre= claves[i]
+    if perfil[nombre]>=40:
+        print(nombre)
+    i += 1
+
+# sumar edades.
+
+edades={
+'juan': 15,
+'Roberto':100,
+'Ana':40,
+'Ariel':48,
+'Caro':78
+
+}
+
+claves=list(edades.keys())
+
+i=0
+suma=0
+
+while i<len(claves):
+    suma=suma + edades[claves[i]]
+    i += 1
+
+print(suma)
+
+
+
+
+
+
+
+
+
 
 
     
