@@ -200,3 +200,5 @@ print('Total de ventas:',total_ventas)
 print('Ventas mas altas ',ventas_altas)
 print('Producto que mas se repite: ',repeticion_productos)
 print('Producto mas vendido: ',mas_vendido)
+
+alumnos=[]
