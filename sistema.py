@@ -59,15 +59,48 @@ def buscar_persona(personas):
 personas=[]
 
 while True:
-print("\n1 Agregar personas")
-print('2.Mostrar personas')
-print("3. Promedio de edades")
-print("4.Mayores y Menores")
-print('5:Buscar personas')
-print("6:SALIR")
+    print("\n1.Agregar personas")
+    print('2.Mostrar personas')
+    print("3.Promedio de edades")
+    print("4.Mayores y Menores")
+    print('5.Buscar personas')
+    print("6.SALIR")
 
-opciones=int(('Elegir una opcion'))
+    opciones=int(input('Elegir una opcion'))
 
-if opciones==1:
-    agregar_personas(personas)
+    if opciones==1:
+        agregar_personas(personas)
+    elif opciones==2:
+        mostrar_personas(personas)
+    elif opciones==3:
+        if len(personas)>0:
+            print("El promedio de edad: ",promedio(personas))
+        else:print("Todavia no hay datos cargados.")
+    elif opciones==4:
+        mayores,menores = listas_edades(personas)
+        print('Son mayores ')
+        for p in mayores:
+            print(p["nombre"],p['edad'])
+        print("Son menores ")
+        for p in menores:
+            print(p['nombre'],p["edad"])
+    elif opciones==5:
+        buscador=buscar_persona(personas)
+
+        if buscador:
+            print('Resultado de la busqueda: ',buscador['nombre'],buscador["edad"])
+        else:print("NO SE ENCONTRO A NADIE !!!!!" )
+    elif opciones==6:
+        break
+
+    
+
+
+
+
+
+    
+    
+    
+
 
