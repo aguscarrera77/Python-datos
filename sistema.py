@@ -22,26 +22,55 @@ def mostrar_personas(personas):
 # declaro una variable como acumulador.
 #dividir por la cantidad de usuarios que se registren.
 
-def promedio(personas):
-    suma=0
-    for persona in personas:
-        suma= suma + persona['edad']
-    promedio=suma/len(personas)
+#def promedio(personas):
+    #suma=0
+    #for persona in personas:
+        #suma= suma + persona['edad']
+    #promedio=suma/len(personas)
+    #return promedio
+def promedio_edad(personas):
+    def obtener_edad(persona):
+        return persona['edad']
+
+    edades=list(map(obtener_edad,personas))
+
+    promedio= sum(edades)/len(edades)
+
     return promedio
+
+
+
+
 
 # necesito saber mayores y menores a 18.
 # 1 recorrer la lista
 #2 genero una condicion con if.
 # 3 armo dos listas con mayores y menores.
 
-def listas_edades(personas):
-    mayores=[]
-    menores=[]
-    for persona in personas:
-        if persona['edad']>=18:
-            mayores.append(persona)
-        else: menores.append(persona)
+#def listas_edades(personas):
+   # mayores=[]
+    #menores=[]
+    #for persona in personas:
+       # if persona['edad']>=18:
+            #mayores.append(persona)
+        #else: menores.append(persona)
+    #return mayores, menores
+
+# CON MAP FUNCION MAYORES Y MENORES.
+
+def mayores(persona):
+    return persona['edad']>=18
+
+def menores(persona):
+    return persona['edad']<18
+
+def separar_edades(personas):
+    es_mayor= list(filter(mayores,personas))
+    es_menor= list(filter(menores,personas))
     return mayores, menores
+
+
+
 
 
 #buscar nombre

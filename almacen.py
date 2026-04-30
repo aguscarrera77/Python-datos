@@ -19,14 +19,29 @@ def mostrar_producto(productos):
     for producto in productos:
         print('Nombre: ',producto['nombre'],'Precio: ',producto["precio"],"Stock: ", producto["stock"])
 
+#def separar_precios(productos):
+    #caros=[]
+    #ofertas=[]
+    #for producto in productos:
+       # if producto['precio']>1000:
+            #caros.append(producto)
+        #else:ofertas.append(producto)
+    #return caros,ofertas
+
+def es_caro(producto):
+    return producto['precio']>1000
+def es_oferta(producto):
+    return producto['precio']<1000
+
 def separar_precios(productos):
-    caros=[]
-    ofertas=[]
-    for producto in productos:
-        if producto['precio']>1000:
-            caros.append(producto)
-        else:ofertas.append(producto)
+    caros=list(filter(es_caro,productos))
+    ofertas=list(filter(es_oferta,productos))
     return caros,ofertas
+
+
+
+
+#<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 def total_precio_stock(productos):
     total=0
