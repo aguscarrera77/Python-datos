@@ -17,6 +17,8 @@ def agregar_pelis():
     
     con.commit()
     print("Sus datos fueron guardados")
+
+    
     con.close()
 
 agregar_pelis()
