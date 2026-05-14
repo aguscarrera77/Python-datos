@@ -3,35 +3,65 @@ import sqlite3
 
 conexion=sqlite3.connect("empleados.db")
 cursor=conexion.cursor()
+#antes de crear necesito validar la estructura llave foranea que me permite tablas relacionados.
+cursor.execute("PRAGMA foreign_keys= ON")
+
+cursor.execute("DELETE FROM empleados")
+#Necesito validar los campos para generar consistencia en la tabla y que los valores no se repitan y en caso de repetirse no los agregue.
+#PARA MARCAR EL CAMPO DE VALORES NO REPETIDOS VOY A USAR EL COMANDO UNIQUE.
+#CREO UNA TABLA NUEVA PADRE PARA PODER RELACIONAR CON LA TABLA LLAMADA EMPLEADOS.
+
+cursor.execute("""
+            CREATE TABLE IF NOT EXISTS        departamentos(
+            id_depto INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre_depto TEXT NOT NULL UNIQUE
+               )""")
 
 cursor.execute(""" 
 CREATE TABLE IF NOT EXISTS empleados
-               (id  INTEGER PRIMARY KEY AUTOINCREMENT,
+               (id_empleados  INTEGER PRIMARY KEY AUTOINCREMENT,
+               dni INTEGER UNIQUE NOT NULL,
                nombre TEXT NOT NULL,
                puesto TEXT,
                salario REAL,
-               fecha_nacimiento DATE)""")
+               fecha_nacimiento DATE,
+               id_depto INTEGER,
+               FOREIGN KEY (id_depto) REFERENCES departamentos(id_depto))""")
 
-print('1.Tabla creada con exito.')
+print('1.Tablas departamentos y empleados creada con existo.')
 
 #INSERTO VALORES.
+#primero cargo datos en la tabla departamentos que es mi tabla padre.
 
-cursor.execute("""INSERT INTO empleados(nombre,puesto,  salario, fecha_nacimiento) VALUES ("Carlos Gardel","Instructor", 850,"1898-01-01")
-""")
+sectores=[("Secretario",),("Preceptor",),("Director",)]
 
-#INSERTAR VARIOS DATOS.
+cursor.executemany("INSERT INTO departamentos(nombre_depto)VALUES(?)",sectores)
+
+
+#INSERTAR DATOS DE LA SEGUNDA TABLA.
 
 nuevos_empleados=[
-('Roberto Galan','Secretario',670,'1910-08-12'),
-('Gonzalez Rivero','Preceptor',620,'1908-08-08'),
-('Nacha Guevera','Directora',890,'1925-10-26'),
-('Ana Martinez','Portera',250,'1960-05-10')
+(3000000,'Roberto Galan','Secretario',670,'1910-08-12'),
+(4908876,'Gonzalez Rivero','Preceptor',620,'1908-08-08'),
+(7542987,'Nacha Guevera','Directora',890,'1925-10-26'),
+(4509876,'Ana Martinez','Portera',250,'1960-05-10')
 ]
-
-cursor.executemany("""INSERT INTO empleados(nombre,puesto,salario,fecha_nacimiento)VALUES(?,?,?,?)""",nuevos_empleados)
+#VALIDAMOS LA INSERCION DE DATOS.
+cursor.executemany("""INSERT INTO empleados(dni,nombre,puesto,salario,fecha_nacimiento)VALUES(?,?,?,?,?)""",nuevos_empleados)
 
 conexion.commit()# GUARDO LOS DATOS INSERTADOS.
 print("2.Datos Insertados correctamente")
+
+#CONSULTAR LAS DOS TABLAS.
+#INNER JOIN CONSULTA RELACIONAL.
+query="""
+SELECT empleados.dni,empleados.nombre,empleados.puesto,empleados.id_depto FROM empleados 
+JOIN departamentos ON empleados.id_depto = departamentos.id_depto
+"""
+cursor.execute(query)
+
+
+
 #LECTURA DE DATOS.
 #fetch all trae varias filas.
 #where me permite en la seleccion de datos generar una condicion.
