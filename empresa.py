@@ -5,8 +5,9 @@ conexion=sqlite3.connect("empleados.db")
 cursor=conexion.cursor()
 #antes de crear necesito validar la estructura llave foranea que me permite tablas relacionados.
 cursor.execute("PRAGMA foreign_keys= ON")
-
-cursor.execute("DELETE FROM empleados")
+#DROP BORRA ESTRUCTURAS Y DATOS. DELETE DATOS.
+cursor.execute("DROP TABLE IF EXISTS empleados")
+cursor.execute("DROP TABLE IF EXISTS departamentos")
 #Necesito validar los campos para generar consistencia en la tabla y que los valores no se repitan y en caso de repetirse no los agregue.
 #PARA MARCAR EL CAMPO DE VALORES NO REPETIDOS VOY A USAR EL COMANDO UNIQUE.
 #CREO UNA TABLA NUEVA PADRE PARA PODER RELACIONAR CON LA TABLA LLAMADA EMPLEADOS.
@@ -56,7 +57,8 @@ print("2.Datos Insertados correctamente")
 #INNER JOIN CONSULTA RELACIONAL.
 query="""
 SELECT empleados.dni,empleados.nombre,empleados.puesto,empleados.id_depto FROM empleados 
-JOIN departamentos ON empleados.id_depto = departamentos.id_depto
+JOIN departamentos 
+ON empleados.id_depto = departamentos.id_depto
 """
 cursor.execute(query)
 
@@ -77,21 +79,21 @@ for nombre,puesto in cursor.fetchall():
 
 # voy a aumentar el sueldo de carlitos gardel 200.
 
-nuevo_sueldo=1050
-nombre_empleado="Carlos Gardel"
+#nuevo_sueldo=1050
+#nombre_empleado="Carlos Gardel"
 
-cursor.execute("""UPDATE empleados SET salario=? WHERE nombre=?""",(nuevo_sueldo,nombre_empleado))
-conexion.commit()
+#cursor.execute("""UPDATE empleados SET salario=? WHERE nombre=?""",(nuevo_sueldo,nombre_empleado))
+#conexion.commit()
 
-print(f"Nuevo salario de {nombre_empleado} : {nuevo_sueldo}")
+
 
 #DELETE borra datos.
 
 #despedimos a nacha guevera por carpeta psiquiatrica.
 
-eliminar_id= 4 #elimina datos buscando el id.
+eliminar_id= 1 #elimina datos buscando el id.
 
-cursor.execute("""DELETE FROM empleados WHERE id=?
+cursor.execute("""DELETE FROM empleados WHERE id_empleados=?
 """,(eliminar_id,))
 
 conexion.commit()
@@ -99,7 +101,7 @@ print("Empleado con id: ",eliminar_id,"despedido")
 
 print("Estado final de la tabla empleados" )
 
-cursor.execute("SELECT id,nombre,salario FROM empleados")
+cursor.execute("SELECT id_empleados,nombre,salario FROM empleados")
 
 for empleado in cursor.fetchall():
     print(f"ID:{empleado[0]},Nombre: {empleado[1]},Salario: {empleado[2]}")
