@@ -1,17 +1,19 @@
-from flask import Flask #flask es un framework de python que me permite crear app de html mas python.
+from flask import Flask, render_template,request
 
-app=Flask(__name__)#a traves de la variable creamos la app. Flask mas __name__ metodo que me permite leer los recursos y archivos que tengo dentro de la app.
-#la ruta principal siempre va a estar declarada de esta manera ("/"). Define el url que compronde esa ruta.
-@app.route("/") #@app.route es mi primera ruta para acceder a mi url con mi servidor local.
+#render template busca dentro de la carpeta templates y lee html.
+
+app=Flask(__name__)
+
+@app.route("/")
 def inicio():
-    return "Hola a todos"
+    return render_template('index.html')
 
-@app.route("/bienvenido")
-def bienvenido():
-    return "<h1>Mi pagina Web</h1>"
-#si envio valores o datos a traves de un formulario por ej aclaro que voy usar metodos de envio POST y GET.
-#@app.route("/formulario", methods=["POST","GET"])
-#def login()
-    
+@app.route("/saludar")
+def saludar():
+    return render_template("saludar.html")
 
+@app.route("/respuesta",methods=['POST'])
+def respuesta():
+    nombre=request.form["nombre"]
+    return render_template("respuesta.html",nombre=nombre)
 app.run(debug=True)
