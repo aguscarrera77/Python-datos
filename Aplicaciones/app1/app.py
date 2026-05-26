@@ -8,9 +8,9 @@ def inicio():
     edad=48
 
     productos=[
-        'Buzo',
-        'Remera',
-        'Jean'
+        "buzo",
+        'remera',
+        'short'
     ]
 
     perfil={
