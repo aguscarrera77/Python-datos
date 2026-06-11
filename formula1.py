@@ -23,7 +23,7 @@ print(pilotos_actualizados)
 
 experiencia=np.array([[3],[5],[4],[1],[2]])
 
-dataset_completo=np.vstack((pilotos_actualizados,experiencia))
+dataset_completo=np.hstack((pilotos_actualizados,experiencia))
 
 print("-----Nueva informacion con datos de Anos en simuladores-----")
 print(dataset_completo)
