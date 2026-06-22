@@ -72,3 +72,62 @@ print('Las celdas que estan vacias: ',edad_vacia)
 promedio_edad=df['Age'].mean()
 
 print(promedio_edad)
+
+#Limpiar y curar los datos que no estan o estan siendo erroneos.
+#rellenar los vacios utilizando la edad promedio.
+
+df['Age']=df['Age'].fillna(promedio_edad)
+
+#Detecte los valores de la columna edad con el tipo float y considero que para mejorar mi analisis lo voy a transformar en entero.
+
+#astype() me permite transformar un tipo valor en otro.
+
+df['Age']=df['Age'].astype(int)
+
+print("\nComo quedo la tabla despues de la limpieza")
+
+espacios_blanco=df['Age'].isnull().sum()
+
+#isnull():chequear celda por celda para ver que contenido tiene. Si celda esta vacia devuelve True que vale 1 y si la celda tiene contenido es False y devuelve 0.
+
+print(f'Cantidad de espacios en blanco en la columna Age es de :{espacios_blanco}')
+print('Primeros 5 lugares de la columna Age con datos limpios')
+
+print(df['Age'].head())
+
+promedio_final=df['Age'].mean()
+print('El promedio final de edad es :',promedio_final)
+print('El promedio antes de limpiar las celdas era: ',promedio_edad)
+
+# LISTA DE MUJERES QUE VIAJABAN EN PRIMERA CLASE Y QUE SOBREVIVIERON PORQUE QUIERE HOMENAJEARLAS.
+
+# 3 CONDICIONES: FEMALE(MUJER),SURVIVED(1),PRIMERA CLASE(1)
+
+mujeres_primera_sobrevivientes=df[
+(df['Sex']=='female') &
+(df["Survived"]==1)&
+(df['Pclass']==1)
+]
+
+print(f'Encontramos {len(mujeres_primera_sobrevivientes)} que cumplen los requisitos solicitados por la empresa navia.')
+
+print(mujeres_primera_sobrevivientes[['Name','Age']].head())
+
+#Crear una columna nueva con una condicion.
+#Condicion es Menor o adulto. Columna nueva con ese dato.
+
+df['Categoria_Edad']=np.where(df['Age']>18,'Adulto','Menor')
+
+print(df[['Name','Age','Categoria_Edad']].head())
+
+#el metodo groupby() juntar varios registros. Es un equivalente a tablas dinamicas de excel.
+
+#promedio de la tarifa por clase.
+#Agrupar por clase 1, 2 , 3. Uso el metodo groupby
+#la columna que uso para el calculo es FARE(TARIFA.)
+#promedio uso mean.
+
+reporte_tarifas=df.groupby('Pclass')['Fare'].mean()
+
+print('TARIFA PROMEDIO POR CLASE.')
+print(reporte_tarifas)
